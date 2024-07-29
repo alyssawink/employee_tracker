@@ -168,10 +168,10 @@ async function addNewRole() {
 
 async function addNewEmployee() {
   try {
-    const results = await pool.query("SELECT role_id, title FROM roles");
-    const roles = results.rows.map(({ role_id, title }) => ({
+    const results = await pool.query("SELECT id, title FROM roles");
+    const roles = results.rows.map(({ id, title }) => ({
       name: title,
-      value: role_id,
+      value: id,
     }));
 
     const employees = await pool.query(
@@ -181,6 +181,8 @@ async function addNewEmployee() {
       name,
       value: id,
     }));
+
+    
 
     const answers = await inquirer.prompt([
       {
@@ -197,23 +199,30 @@ async function addNewEmployee() {
         type: "list",
         name: "roleId",
         message: "Select the employee role:",
-        choices: roles,
+        choices: [...roles],
       },
       {
         type: "list",
         name: "managerId",
         message: "Select the employee manager:",
-        choices: [{ name: "None", value: null }, ...managers],
+        choices: [...managers],
+      },
+      {
+        type: "list",
+        name: "isManager",
+        message: "Is this the manager?",
+        choices: ["true", "false"],
       },
     ]);
 
     const sql =
-      "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)";
+      "INSERT INTO employees (first_name, last_name, role_id, manager_id, is_manager) VALUES ($1, $2, $3, $4, $5)";
     const values = [
       answers.firstName,
       answers.lastName,
       answers.roleId,
       answers.managerId,
+      answers.isManager
     ];
     await pool.query(sql, values);
 
