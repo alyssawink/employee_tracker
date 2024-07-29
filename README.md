@@ -7,8 +7,11 @@ This command-line application allows business owners to view, manage, and organi
 To run this application locally, follow these steps:
 
 • Simply clone the repository
+
 • Set up your PostgreSQL database and configure connection details in a .env file.
+
 • Install the following dependencies:
+
     • npm i
     • npm init -y
     • npm i express
@@ -22,10 +25,11 @@ To run this application locally, follow these steps:
 
 ## Usage
 • To start the application, run node server.js or npm start in your terminal.
+
 • Follow the on-screen prompts to navigate through different options and manage your employee database.
 
 ## Application Image
-
+![Screenshot 2024-07-28 at 7 29 07 PM](https://github.com/user-attachments/assets/7bbf589e-574e-4832-afd7-552c4faad239)
 
 ## URLs
 https://github.com/alyssawink/employee_tracker
